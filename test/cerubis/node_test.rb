@@ -44,20 +44,4 @@ class Cerubis::NodeTest < MiniTest::Unit::TestCase
     node.children << child
     assert_equal node, child.parent
   end
-
-  def test_render_nested_nodes
-    root    = Cerubis::Node.new('Foo')
-    child_1 = Cerubis::Node.new('Bar')
-    child_2 = Cerubis::Node.new('Baz')
-    child_3 = Cerubis::Node.new('Cux')
-    child_4 = Cerubis::Node.new('Qux')
-
-    root.children << child_1
-    root.children << child_4
-
-    child_1.children << child_2
-    child_2.children << child_3
-
-    assert_equal 'FooBarBazCuxQux', root.render
-  end
 end
