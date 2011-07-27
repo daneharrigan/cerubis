@@ -17,7 +17,7 @@ class Cerubis
         @current_regex = @default_regex
         @blocks = []
 
-        block_positions until @scanner.eos?
+        record_positions until @scanner.eos?
         raise SyntaxError, "An open block is not closed" if blocks_not_closed?
 
         build_nodes
@@ -47,7 +47,7 @@ class Cerubis
         @nodes << Node.new(@content[start_of_str...end_of_str])
       end
 
-      def block_positions
+      def record_positions
         @scanner.scan_until @current_regex
         current_match = @scanner[0]
 
@@ -63,7 +63,9 @@ class Cerubis
       end
 
       def nested_block?
-        !@blocks.empty? && !@blocks.last.is_a?(Array)
+        return false if @blocks.empty?
+        return false if @blocks.last.is_a?(Array) && @blocks.last.size == 3
+        true
       end
 
       def blocks_not_closed?
@@ -74,22 +76,24 @@ class Cerubis
       end
 
       def parse_open_block
+        block_name = @scanner[2].to_sym
         close_regex = Matcher::CloseBlockPlaceholder.sub('block_name', @scanner[2])
         @current_regex = Regexp.new("(#{Matcher::OpenBlock})|(#{close_regex})")
 
         if nested_block?
-          @blocks << @scanner[2]
+          @blocks << block_name
         else
-          @blocks << [@scanner[2], @scanner.pos - @scanner.matched_size]
+          @blocks << [block_name, @scanner.pos - @scanner.matched_size]
         end
       end
 
       def parse_close_block
         raise SyntaxError, 'Closing block was found without an opening' if @blocks.empty?
+        block_name = @scanner[9].to_sym
 
-        if @blocks.last == @scanner[9] # found the nested closing block
+        if @blocks.last == block_name # found the nested closing block
           @blocks.pop
-        elsif @blocks && @blocks.last.is_a?(Array) && @blocks.last[0] == @scanner[9]
+        elsif @blocks && @blocks.last.is_a?(Array) && @blocks.last[0] == block_name
           @blocks.last << @scanner.pos
         end
       end

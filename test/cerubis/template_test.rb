@@ -30,6 +30,15 @@ class Cerubis::TemplateTest < MiniTest::Unit::TestCase
     assert html.has_selector?('body > section', content: 'Foo Content')
   end
 
+  def test_parse_nested_blocks
+    template = Cerubis::Template.new(nested_content)
+    html = Capybara::Node::Simple.new(template.to_html)
+
+    assert html.has_selector?('body > header > h1', content: 'Header Content')
+    assert html.has_selector?('body > header > section > p', content: 'Paragraph Content')
+    refute_match /\{\{/, template.to_html
+  end
+
   private
     def content
       <<-STR
@@ -37,6 +46,25 @@ class Cerubis::TemplateTest < MiniTest::Unit::TestCase
         {{#if true}}
           <section>Foo Content</section>
         {{/if}}
+        </body>
+      STR
+    end
+
+    def nested_content
+      <<-STR
+        <body>
+          <header>
+          {{#if true}}
+            <h1>Header Content</h1>
+            {{#if true}}
+              <section>
+                {{#if true}}
+                  <p>{{#if true}} Paragraph Content {{/if}}</p>
+                {{/if}}
+              </section>
+            {{/if}}
+          {{/if}}
+          </header>
         </body>
       STR
     end
