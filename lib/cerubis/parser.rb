@@ -4,8 +4,9 @@ class Cerubis
   class Parser
     attr :nodes
 
-    def initialize(content='')
+    def initialize(content='', options)
       @content = content
+      @options = options
       @scanner = StringScanner.new(@content)
       @nodes   = []
       parse!
@@ -44,7 +45,7 @@ class Cerubis
       end
 
       def create_node(start_of_str, end_of_str)
-        @nodes << Node.new(@content[start_of_str...end_of_str])
+        @nodes << Node.new(@content[start_of_str...end_of_str], @options)
       end
 
       def record_positions

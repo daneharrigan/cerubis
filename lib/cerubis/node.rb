@@ -1,12 +1,13 @@
 class Cerubis
   class Node
     attr :content
-    attr_accessor :parent
+    attr :parent
     attr_accessor :type
     attr_accessor :condition
 
-    def initialize(content='')
-      @content  = content
+    def initialize(content='', options={})
+      @content = content
+      @parent  = options[:parent]
       define_node!
       parse! unless static?
     end
@@ -17,7 +18,7 @@ class Cerubis
     end
 
     def children
-      @children ||= NodeList.new(self)
+      @children ||= NodeList.new
     end
 
     def children?
@@ -30,7 +31,7 @@ class Cerubis
       end
 
       def parse!
-        Parser.new(content).nodes.each { |node| children << node }
+        Parser.new(content, parent: self).nodes.each { |node| children << node }
       end
 
       def define_node!
