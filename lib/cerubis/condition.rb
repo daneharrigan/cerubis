@@ -36,9 +36,9 @@ class Cerubis
       end
 
       def validate_object
-        case context.find(@parsed_content[0])
-          when TrueClass
-        end
+        #case context.find(@parsed_content[0])
+        #  when TrueClass
+        #end
       end
 
       def validate_object_and_operator
