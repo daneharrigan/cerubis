@@ -5,7 +5,8 @@ class Cerubis
     BlockName     = '[a-z_]+'
     ObjectMethod  = '[a-z0-9_]+(\.[a-z_0-9]+\??)*?'
     Operators     = [:==, :===, :'!=', :'!==', :<, :>, :<=, :>=, :in]
-    OpenBlockStr  = "#{OpenTag}\#(#{BlockName})(\s+#{ObjectMethod}(\s*(#{Operators.join('|')})\s*#{ObjectMethod})?)?#{CloseTag}"
+    Conditions    = /(#{ObjectMethod})(\s*(#{Operators.join('|')})\s*(#{ObjectMethod}))?/
+    OpenBlockStr  = "#{OpenTag}\#(#{BlockName})(\s+#{Conditions})?#{CloseTag}"
     CloseBlockPlaceholder = "#{OpenTag}\/(block_name)#{CloseTag}"
     CloseBlockStr = CloseBlockPlaceholder.sub('block_name', BlockName)
     OpenBlock     = Regexp.new(OpenBlockStr)
