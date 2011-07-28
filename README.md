@@ -35,6 +35,7 @@ You can run the tests in a few different ways. First, you've got your
 standard ruby way:
 
     ruby -Ilib:test test/cerubis_test.rb
+    ruby -Ilib:test test/all.rb
 
 Or you can use a few Thor commands:
 
