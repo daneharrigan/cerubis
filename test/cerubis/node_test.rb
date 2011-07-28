@@ -43,6 +43,14 @@ class Cerubis::NodeTest < MiniTest::Unit::TestCase
     assert_equal node, child.parent
   end
 
+  def test_node_context_traverses_to_parent_template
+    template = Cerubis::Template.new('', foo: :bar)
+    node     = Cerubis::Node.new('', parent: template)
+    child    = Cerubis::Node.new('', parent: node)
+
+    assert_equal template.context, child.context
+  end
+
   private
     def options
       { parent: StubObject.new }

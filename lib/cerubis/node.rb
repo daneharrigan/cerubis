@@ -25,6 +25,10 @@ class Cerubis
       @children && !@children.empty?
     end
 
+    def context
+      parent.context
+    end
+
     private
       def static?
         self.type == :static
