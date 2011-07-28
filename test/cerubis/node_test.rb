@@ -30,23 +30,23 @@ class Cerubis::NodeTest < MiniTest::Unit::TestCase
   end
 
   def test_adding_children
-    node  = Cerubis::Node.new('', options)
-    child = Cerubis::Node.new('', parent: node)
+    node  = Cerubis::Node.new(blank_content, options)
+    child = Cerubis::Node.new(blank_content, parent: node)
 
     node.children << child
     assert_includes node.children, child
   end
 
   def test_passing_parent_in_options_sets_it_in_node
-    node  = Cerubis::Node.new('', options)
-    child = Cerubis::Node.new('', parent: node)
+    node  = Cerubis::Node.new(blank_content, options)
+    child = Cerubis::Node.new(blank_content, parent: node)
     assert_equal node, child.parent
   end
 
   def test_node_context_traverses_to_parent_template
-    template = Cerubis::Template.new('', foo: :bar)
-    node     = Cerubis::Node.new('', parent: template)
-    child    = Cerubis::Node.new('', parent: node)
+    template = Cerubis::Template.new(blank_content, foo: :bar)
+    node     = Cerubis::Node.new(blank_content, parent: template)
+    child    = Cerubis::Node.new(blank_content, parent: node)
 
     assert_equal template.context, child.context
   end
@@ -54,5 +54,9 @@ class Cerubis::NodeTest < MiniTest::Unit::TestCase
   private
     def options
       { parent: StubObject.new }
+    end
+
+    def blank_content
+      ''
     end
 end
