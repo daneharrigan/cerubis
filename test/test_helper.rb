@@ -7,7 +7,11 @@ require 'ruby-debug'
 require 'capybara'
 
 class StubObject
+  def initialize(methods={})
+    @methods = methods
+  end
+
   def method_missing(*args)
-    self.class.new
+    @methods[args.first] || self.class.new
   end
 end

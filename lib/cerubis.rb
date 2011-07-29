@@ -1,4 +1,7 @@
 class Cerubis
+  autoload :TextNode,    'cerubis/text_node'
+
+
   autoload :Node,        'cerubis/node'
   autoload :NodeList,    'cerubis/node_list'
   autoload :Matcher,     'cerubis/matcher'
