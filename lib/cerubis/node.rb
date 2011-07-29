@@ -43,7 +43,7 @@ class Cerubis
           content.sub!(/^#{open_block[0]}/, open_block[1])
           content.sub!(/#{Matcher::CloseBlock}$/,'')
 
-          self.type = open_block[3].to_sym
+          self.type  = open_block[3].to_sym
           self.condition = Condition.new(open_block[4])
         else
           self.type = :static

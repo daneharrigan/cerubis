@@ -12,7 +12,9 @@ class Cerubis::TemplateTest < MiniTest::Unit::TestCase
     context  = { foo: true, bar: false}
     template = Cerubis::Template.new('', context)
 
-    assert_equal context, template.context
+    assert_equal context[:foo], template.context[:foo]
+    assert_equal context[:bar], template.context[:bar]
+    assert_instance_of Cerubis::Context, template.context
   end
 
   def test_node_stucture

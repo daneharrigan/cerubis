@@ -6,8 +6,8 @@ class Cerubis
 
     def initialize(content, context={})
       @content = content
-      @context = context
-      @nodes = Parser.new(@content, parent: self).nodes
+      @context = Context.new(context)
+      @nodes   = Parser.new(@content, parent: self).nodes
     end
 
     def compile

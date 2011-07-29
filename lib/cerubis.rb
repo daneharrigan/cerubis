@@ -5,6 +5,7 @@ class Cerubis
   autoload :Template,    'cerubis/template'
   autoload :Parser,      'cerubis/parser'
   autoload :Condition,   'cerubis/condition'
+  autoload :Context,     'cerubis/context'
   autoload :SyntaxError, 'cerubis/syntax_error'
 
   def self.render(template, context={})

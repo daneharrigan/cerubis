@@ -14,7 +14,7 @@ Output is defined as `{{ ... }}`.
 
     <header>
       <h1>{{ page.title }}</h1>
-      {{#unless navigation.empty? }}
+      {{#unless navigation.empty?}}
       <menu>
         {{#loop nav in navigation}}
         <li>{{ link_to page }}</li>
