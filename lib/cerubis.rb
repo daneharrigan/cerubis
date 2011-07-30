@@ -9,6 +9,14 @@ class Cerubis
   autoload :Context,     'cerubis/context'
   autoload :SyntaxError, 'cerubis/syntax_error'
 
+  def self.register_block(name, klass)
+    blocks[name] = klass
+  end
+
+  def self.blocks
+    @blocks ||= {}
+  end
+
   def self.render(template, context={})
     new.render(template, context)
   end

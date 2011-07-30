@@ -15,3 +15,5 @@ class StubObject
     @methods[args.first] || self.class.new
   end
 end
+
+Cerubis.register_block :if, StubObject
