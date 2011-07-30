@@ -11,9 +11,14 @@ class Cerubis::ParserTest < MiniTest::Unit::TestCase
     STR
 
     nodes = Cerubis::Parser.new(content, options).nodes
-    assert_equal '<body>',      nodes[0].render.strip
+    assert_equal '<body>', nodes[0].render.strip
+    assert_instance_of Cerubis::TextNode, nodes[0]
+
     assert_equal 'Foo Content', nodes[1].render.strip
-    assert_equal '</body>',     nodes[2].render.strip
+    assert_instance_of Cerubis::BlockNode, nodes[1]
+
+    assert_equal '</body>', nodes[2].render.strip
+    assert_instance_of Cerubis::TextNode, nodes[2]
   end
 
   def test_exception_raised_if_closing_block_is_found_without_an_opening

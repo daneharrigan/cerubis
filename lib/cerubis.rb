@@ -1,9 +1,7 @@
 class Cerubis
-  autoload :TextNode,    'cerubis/text_node'
-
-
   autoload :Node,        'cerubis/node'
-  autoload :NodeList,    'cerubis/node_list'
+  autoload :TextNode,    'cerubis/text_node'
+  autoload :BlockNode,   'cerubis/block_node'
   autoload :Matcher,     'cerubis/matcher'
   autoload :Template,    'cerubis/template'
   autoload :Parser,      'cerubis/parser'

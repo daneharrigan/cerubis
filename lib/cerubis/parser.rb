@@ -27,25 +27,27 @@ class Cerubis
       def build_nodes
         if !@blocks.empty?
           str_position = @blocks.first[1] # start of first block
-          @blocks.unshift([:static, 0, str_position-1]) unless str_position.zero?
+          @blocks.unshift([:text, 0, str_position-1]) unless str_position.zero?
 
           str_position = @blocks.last[2] # end of last block
           if str_position != @content.size
-            @blocks << [:static, str_position+1, @content.size]
+            @blocks << [:text, str_position+1, @content.size]
           end
         end
 
-        until @blocks.empty? do
-          block = @blocks.shift
-          start_of_block = block[1]
-          end_of_block   = block[2]
-
-          create_node(start_of_block, end_of_block)
-        end
+        create_node(@blocks.shift) until @blocks.empty?
       end
 
-      def create_node(start_of_str, end_of_str)
-        @nodes << Node.new(@content[start_of_str...end_of_str], @options)
+      def create_node(block)
+        start_of_str = block[1]
+        end_of_str   = block[2]
+        content      = @content[start_of_str...end_of_str]
+
+        if block[0] == :text
+          @nodes << TextNode.new(content, @options)
+        else
+          @nodes << BlockNode.new(content, @options)
+        end
       end
 
       def record_positions
