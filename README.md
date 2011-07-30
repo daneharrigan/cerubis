@@ -1,4 +1,4 @@
-# Cerubis
+# Cerubis [![Test Status](https://secure.travis-ci.org/daneharrigan/cerubis.png)][3]
 
 *WARNING:* Cerubis is still under initial development. Most features are
 not functional yet.
@@ -45,3 +45,4 @@ Or you can use a few Thor commands:
 
 [1]: http://github.com/shopify/liquid
 [2]: http://github.com/defunkt/mustache
+[3]: https://secure.travis-ci.org/daneharrigan/liquify
