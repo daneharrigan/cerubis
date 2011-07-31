@@ -38,6 +38,16 @@ class Cerubis::TemplateTest < MiniTest::Unit::TestCase
 
     assert html.has_selector?('body > header > h1', content: 'Header Content')
     assert html.has_selector?('body > header > section > p', content: 'Paragraph Content')
+    refute html.has_selector?('body > header > #hidden', content: 'Hidden Content')
+    refute_match /\{\{/, template.to_html
+  end
+
+  def test_parse_unless_block
+		skip 'Need to link node and block together'
+    template = Cerubis::Template.new(hidden_content)
+    html = Capybara::Node::Simple.new(template.to_html)
+
+    refute html.has_selector?('body > #hidden', content: 'Hidden Content')
     refute_match /\{\{/, template.to_html
   end
 
@@ -68,6 +78,16 @@ class Cerubis::TemplateTest < MiniTest::Unit::TestCase
           {{/if}}
           </header>
         </body>
+      STR
+    end
+
+    def hidden_content
+      <<-STR
+				<body>
+        {{#unless true}}
+          <section id="hidden">Hidden Content</section>
+        {{/unless}}
+				</body>
       STR
     end
 end

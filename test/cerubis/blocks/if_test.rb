@@ -21,20 +21,4 @@ class Cerubis::Blocks::IfTest < MiniTest::Unit::TestCase
   def test_block_condition_is_true
     assert @block.true?
   end
-
-
-  #
-  # class If
-  #   attr :conditions
-  #   attr :node
-  #
-  #   def render
-  #     if conditions.true?
-  #       node.render
-  #     end
-  #   end
-  # end
-  #
-  #
-  #
 end

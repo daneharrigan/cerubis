@@ -15,7 +15,11 @@ class Cerubis
     end
 
     def true?
-      validate_object || validate_object_and_operator
+      if @parsed_content.size == 3
+        validate_object_and_operator
+      else
+        validate_object
+      end
     end
 
     private
@@ -25,13 +29,10 @@ class Cerubis
       end
 
       def validate_object
-        return if @parsed_content.size == 3
         context.get(@parsed_content[0])
       end
 
       def validate_object_and_operator
-        return unless @parsed_content.size == 3
-
         operator     = @parsed_content[1].to_sym
         obj          = context.get(@parsed_content[0])
         obj_compared = context.get(@parsed_content[2])
