@@ -2,8 +2,8 @@ class Cerubis
   class TextNode
     include Node
 
-    def render
-      return content
-    end
+		def render
+			pre_render
+		end
   end
 end

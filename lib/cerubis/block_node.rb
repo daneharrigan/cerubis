@@ -7,8 +7,10 @@ class Cerubis
       define_node!
       parse!
 
-      # DH: not yet
-      # return unless block.condition.true?
+      block.render
+    end
+
+    def pre_render
       return children.map(&:render).join if children?
       content
     end

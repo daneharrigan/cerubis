@@ -19,5 +19,9 @@ class Cerubis
     def children?
       !@children.empty?
     end
+
+		def pre_render
+			return content
+		end
   end
 end
