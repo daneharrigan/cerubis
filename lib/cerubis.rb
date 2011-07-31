@@ -1,3 +1,5 @@
+require 'cerubis/blocks/if'
+
 class Cerubis
   autoload :Node,        'cerubis/node'
   autoload :TextNode,    'cerubis/text_node'
@@ -25,3 +27,5 @@ class Cerubis
     Template.new(template, context)
   end
 end
+
+Cerubis.register_block :if, Cerubis::Blocks::If
