@@ -12,6 +12,11 @@ class Cerubis
       def true?
         condition.true?
       end
+
+      def render
+        return unless true?
+        node.pre_render
+      end
     end
   end
 end
