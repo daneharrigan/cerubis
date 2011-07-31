@@ -2,7 +2,10 @@ bundler_args: --without development
 rvm:
   - 1.9.2
   - ruby-head
+  - jruby
 script: "ruby -Itest:lib test/all.rb"
 branches:
   only:
     - master
+env:
+  - JRUBY_OPTS=--1.9
