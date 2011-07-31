@@ -14,6 +14,8 @@ class StubObject
   def method_missing(*args)
     @methods[args.first] || self.class.new
   end
-end
 
-Cerubis.register_block :if, StubObject
+	def respond_to?(*args)
+		@methods.include?(args.first.to_sym) || super
+	end
+end
