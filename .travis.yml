@@ -3,9 +3,9 @@ rvm:
   - 1.9.2
   - ruby-head
   - jruby
-  - rbx-2.0
 script: "ruby -Itest:lib test/all.rb"
 branches:
   only:
     - master
-env: JRUBY_OPTS=--1.9 RBXOPT=-X19
+env: JRUBY_OPTS=--1.9
+# RBXOPT=-X19 # need to sort out bundler/setup requiring issue
