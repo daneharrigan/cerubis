@@ -8,8 +8,6 @@ class Cerubis
       @content = content.strip
       @context = options[:context]
       @type    = options[:type]
-      @true    = false
-      @repeat  = false
 
       define_condition!
     end
