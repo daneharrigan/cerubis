@@ -3,8 +3,12 @@ require 'minitest/autorun'
 require 'cerubis'
 
 # test tools
-require 'ruby-debug'
 require 'capybara'
+
+begin
+  require 'ruby-debug'
+rescue LoadError
+end
 
 class StubObject
   def initialize(methods={})
