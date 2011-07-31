@@ -43,7 +43,6 @@ class Cerubis::TemplateTest < MiniTest::Unit::TestCase
   end
 
   def test_parse_unless_block
-		skip 'Need to link node and block together'
     template = Cerubis::Template.new(hidden_content)
     html = Capybara::Node::Simple.new(template.to_html)
 

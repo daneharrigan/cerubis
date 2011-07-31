@@ -11,7 +11,7 @@ class Cerubis
     end
 
     def compile
-      nodes.map(&:render).join
+      @template ||= nodes.map(&:render).join
     end
 
     alias :to_html :compile
