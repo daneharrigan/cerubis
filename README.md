@@ -45,4 +45,4 @@ Or you can use a few Thor commands:
 
 [1]: http://github.com/shopify/liquid
 [2]: http://github.com/defunkt/mustache
-[3]: https://secure.travis-ci.org/daneharrigan/liquify
+[3]: https://secure.travis-ci.org/daneharrigan/cerubis
