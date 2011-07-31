@@ -15,34 +15,37 @@ class Cerubis
     end
 
     def true?
-      @true
-    end
-
-    def repeat?
-      @repeat
-      return false if [:if, :unless].include?(type)
+      validate_object || validate_object_and_operator
     end
 
     private
       def define_condition!
         match = content.match Matcher::Conditions
-        @parsed_content = [match[1], match[4], match[5]].compact
-
-        if @parsed_content.size == 3
-          validate_object_and_operator
-        else
-          validate_object
-        end
+        @parsed_content = [match[1], match[5], match[6]].compact
       end
 
       def validate_object
-        #case context.find(@parsed_content[0])
-        #  when TrueClass
-        #end
+        return if @parsed_content.size == 3
+        context.get(@parsed_content[0])
       end
 
       def validate_object_and_operator
+        return unless @parsed_content.size == 3
 
+        operator     = @parsed_content[1].to_sym
+        obj          = context.get(@parsed_content[0])
+        obj_compared = context.get(@parsed_content[2])
+
+        case operator
+          when :==    then (obj ==  obj_compared)
+          when :===   then (obj === obj_compared)
+          when :'!='  then (obj !=  obj_compared)
+          when :<     then (obj <   obj_compared)
+          when :>     then (obj >   obj_compared)
+          when :<=    then (obj <=  obj_compared)
+          when :>=    then (obj >=  obj_compared)
+          #when :in
+        end
       end
   end
 end
