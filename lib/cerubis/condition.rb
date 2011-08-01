@@ -4,6 +4,7 @@ class Cerubis
     attr :type
     attr :context
     attr :context_objects
+    attr :parsed_content
 
     def initialize(content, options={})
       @content = content.strip

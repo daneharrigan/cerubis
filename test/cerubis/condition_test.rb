@@ -1,7 +1,16 @@
 require 'test_helper'
 
 class Cerubis::ConditionTest < MiniTest::Unit::TestCase
-  def test_context_objects_from_condition
+  def test_context_objects
+    condition_str = '2 > 1'
+    context   = Cerubis::Context.new
+    condition = Cerubis::Condition.new(condition_str, type: :if, context: context)
+
+    assert condition.true?
+    assert_equal ['2', '>', '1'], condition.parsed_content
+  end
+
+  def test_parsed_content
     condition_str = 'item > item2'
     context   = Cerubis::Context.new(item: 2, item2: 1)
     condition = Cerubis::Condition.new(condition_str, type: :if, context: context)
