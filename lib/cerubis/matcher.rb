@@ -9,20 +9,8 @@ class Cerubis
     OpenBlockStr  = "#{OpenTag}\#(#{BlockName})(\s+#{Conditions})?#{CloseTag}"
     CloseBlockPlaceholder = "#{OpenTag}\/(block_name)#{CloseTag}"
     CloseBlockStr = CloseBlockPlaceholder.sub('block_name', BlockName)
-    OpenBlock     = Regexp.new(OpenBlockStr)
-    CloseBlock    = Regexp.new(CloseBlockStr)
-
-
-
-=begin
-    def self.regex(matcher, replacements={})
-      matcher = matcher.dup
-      replacements.each do |placeholder, value|
-        matcher.sub(placeholder, value)
-      end
-
-      return Regexp.new(matcher)
-    end
-=end
+    OpenBlock     = /#{OpenBlockStr}/
+    CloseBlock    = /#{CloseBlockStr}/
+    Variable      = /#{OpenTag}\s*(#{ObjectMethod})\s*#{CloseTag}/
   end
 end

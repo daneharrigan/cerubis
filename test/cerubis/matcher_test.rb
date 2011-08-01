@@ -5,6 +5,7 @@ require 'matchers/test_object_method'
 require 'matchers/test_open_block'
 require 'matchers/test_close_block'
 require 'matchers/test_conditions'
+require 'matchers/test_variable'
 
 class Cerubis::MatcherTest < MiniTest::Unit::TestCase
   include TestOperators
@@ -13,4 +14,5 @@ class Cerubis::MatcherTest < MiniTest::Unit::TestCase
   include TestOpenBlock
   include TestCloseBlock
   include TestConditions
+  include TestVariable
 end
