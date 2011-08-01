@@ -50,6 +50,14 @@ class Cerubis::TemplateTest < MiniTest::Unit::TestCase
     refute_match /\{\{/, template.to_html
   end
 
+  def test_parse_loop_block
+    template = Cerubis::Template.new(loop_content, collection: [1,2,3])
+    html = Capybara::Node::Simple.new(template.to_html)
+
+    assert html.has_selector?('body > p', content: 'Loop Content', count: 3)
+    refute_match /\{\{/, template.to_html
+  end
+
   private
     def content
       <<-STR
@@ -87,6 +95,16 @@ class Cerubis::TemplateTest < MiniTest::Unit::TestCase
           <section id="hidden">Hidden Content</section>
         {{/unless}}
 				</body>
+      STR
+    end
+
+    def loop_content
+      <<-STR
+      <body>
+      {{#loop item in collection}}
+        <p>Loop Content</p>
+      {{/loop}}
+      </body>
       STR
     end
 end

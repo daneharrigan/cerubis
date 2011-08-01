@@ -28,7 +28,7 @@ class Cerubis
         content.sub!(/^#{open_block[0]}/, open_block[1])
         content.sub!(/#{Matcher::CloseBlock}$/,'')
 
-        options = { context: context, node: self, condition: condition_str }
+        options = { context: context, node: self, condition: condition_str, type: block_name }
         self.block = blocks[block_name].new(options)
       end
 

@@ -1,5 +1,7 @@
+require 'cerubis/block'
 require 'cerubis/blocks/if'
 require 'cerubis/blocks/unless'
+require 'cerubis/blocks/loop'
 
 class Cerubis
   autoload :Node,        'cerubis/node'
@@ -31,3 +33,4 @@ end
 
 Cerubis.register_block :if, Cerubis::Blocks::If
 Cerubis.register_block :unless, Cerubis::Blocks::Unless
+Cerubis.register_block :loop, Cerubis::Blocks::Loop
