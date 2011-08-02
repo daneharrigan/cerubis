@@ -4,10 +4,11 @@ class Cerubis
     attr_accessor :block
 
     def render
-      define_node!
-      parse!
-
-      block.render
+      @render ||= begin
+        define_node!
+        parse!
+        block.render
+      end
     end
 
     def pre_render

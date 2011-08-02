@@ -15,6 +15,20 @@ class Cerubis::BlockNodeTest < MiniTest::Unit::TestCase
     refute_match /\{\{/, node.render
   end
 
+  def test_variable_replacement
+    content = <<-STR
+    {{#if true}}
+      <h1>{{title}}</h1>
+    {{/if}}
+    STR
+
+    node = Cerubis::BlockNode.new(content, options)
+    html = Capybara::Node::Simple.new(node.render)
+
+    assert html.has_selector?('h1', content: 'Foo Title')
+    refute_match /\{\{/, node.render
+  end
+
   private
     def class_name
       Cerubis::BlockNode

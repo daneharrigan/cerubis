@@ -16,7 +16,7 @@ class Cerubis
 
     def render
       return unless true?
-      node.pre_render
+      replace_variables(node.pre_render, node.context)
     end
   end
 end

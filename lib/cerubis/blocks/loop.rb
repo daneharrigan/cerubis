@@ -1,6 +1,7 @@
 class Cerubis
   module Blocks
     class Loop
+      include VariableReplacement
       include Block
 
       def render
@@ -9,9 +10,7 @@ class Cerubis
         item_key   = condition.parsed_content[0]
 
         collection.map do |item|
-          # set item_key to item
-          # replace variables
-          node.pre_render
+          replace_variables(node.pre_render, node.context)
         end.join
       end
     end
