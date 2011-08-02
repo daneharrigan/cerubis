@@ -13,6 +13,7 @@ class Cerubis
   autoload :Condition,   'cerubis/condition'
   autoload :Context,     'cerubis/context'
   autoload :SyntaxError, 'cerubis/syntax_error'
+  autoload :VariableReplacement, 'cerubis/variable_replacement'
 
   def self.register_block(name, klass)
     blocks[name] = klass

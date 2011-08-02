@@ -1,9 +1,10 @@
 class Cerubis
   class TextNode
     include Node
+    include VariableReplacement
 
 		def render
-			pre_render
+			replace_variables(pre_render, context)
 		end
   end
 end

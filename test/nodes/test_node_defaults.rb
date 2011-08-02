@@ -18,7 +18,9 @@ module TestNodeDefaults
 
   private
     def options
-      { title: 'Foo Title' }
+      context = Cerubis::Context.new(title: 'Foo Title')
+      parent  = StubObject.new(context: context)
+      { parent: parent }
     end
 
     def content

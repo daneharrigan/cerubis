@@ -5,9 +5,7 @@ class Cerubis::TextNodeTest < MiniTest::Unit::TestCase
   include TestNodeDefaults
 
   def test_render_returns_content_with_variables_replaced
-    skip "Variable replacement doesn't happen yet"
-
-    node    = Cerubis::TextNode.new(content, options)
+    node = Cerubis::TextNode.new(content, options)
     assert_equal '<h1>Foo Title</h1>', node.render
   end
 
