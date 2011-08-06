@@ -25,7 +25,7 @@ class Cerubis::BlockNodeTest < MiniTest::Unit::TestCase
     node = Cerubis::BlockNode.new(content, options)
     html = Capybara::Node::Simple.new(node.render)
 
-    assert html.has_selector?('h1', content: 'Foo Title')
+    assert html.has_selector?('h1', text: 'Foo Title')
     refute_match /\{\{/, node.render
   end
 

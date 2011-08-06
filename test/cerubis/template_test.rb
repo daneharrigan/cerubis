@@ -29,16 +29,17 @@ class Cerubis::TemplateTest < MiniTest::Unit::TestCase
     template = Cerubis::Template.new(content)
     html = Capybara::Node::Simple.new(template.to_html)
 
-    assert html.has_selector?('body > section', content: 'Foo Content')
+    assert html.has_selector?('body > section', text: 'Foo Content')
   end
 
   def test_parse_nested_blocks
     template = Cerubis::Template.new(nested_content)
     html = Capybara::Node::Simple.new(template.to_html)
 
-    assert html.has_selector?('body > header > h1', content: 'Header Content')
-    assert html.has_selector?('body > header > section > p', content: 'Paragraph Content')
-    refute html.has_selector?('body > header > #hidden', content: 'Hidden Content')
+    assert html.has_selector?('body > header > h1', text: 'Header Content')
+    assert html.has_selector?('body > header > section > p', text: 'Paragraph Content')
+
+    refute html.has_selector?('body > header > #hidden', text: 'Hidden Content')
     refute_match /\{\{/, template.to_html
   end
 
@@ -46,7 +47,7 @@ class Cerubis::TemplateTest < MiniTest::Unit::TestCase
     template = Cerubis::Template.new(hidden_content)
     html = Capybara::Node::Simple.new(template.to_html)
 
-    refute html.has_selector?('body > #hidden', content: 'Hidden Content')
+    refute html.has_selector?('body > #hidden', text: 'Hidden Content')
     refute_match /\{\{/, template.to_html
   end
 
@@ -54,7 +55,7 @@ class Cerubis::TemplateTest < MiniTest::Unit::TestCase
     template = Cerubis::Template.new(loop_content, collection: [1,2,3])
     html = Capybara::Node::Simple.new(template.to_html)
 
-    assert html.has_selector?('body > p', content: 'Loop Content', count: 3)
+    assert html.has_selector?('body > p', text: 'Loop Content', count: 3)
     refute_match /\{\{/, template.to_html
   end
 
