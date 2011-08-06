@@ -13,6 +13,7 @@ class Cerubis
   autoload :Parser,      'cerubis/parser'
   autoload :Condition,   'cerubis/condition'
   autoload :Context,     'cerubis/context'
+  autoload :Method,      'cerubis/method'
   autoload :SyntaxError, 'cerubis/syntax_error'
 
   def self.register_block(name, klass)
