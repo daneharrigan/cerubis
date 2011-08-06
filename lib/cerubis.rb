@@ -37,6 +37,7 @@ end
 require 'cerubis/objects/array'
 require 'cerubis/objects/float'
 require 'cerubis/objects/fixnum'
+require 'cerubis/objects/hash'
 require 'cerubis/objects/string'
 
 Cerubis.register_block :if, Cerubis::Blocks::If
