@@ -29,6 +29,37 @@ Output is defined as `{{ ... }}`.
 * unless
 * loop
 
+## Objects in Template Context
+
+Rendering a Cerubis template with objects in the context is easy:
+
+    template_str = <<-STR
+      {{#if items.empty?}}
+        <p>There are no items!</p>
+      {{/if}}
+    STR
+
+    context = { items: [1,2,3] }
+
+    Cerubis.render(template_str, context)
+
+You can create your own objects and add them to template context, but
+you need to make Cerubis aware of the methods it's allowed to call:
+
+    class Foo
+      include Cerubis::Method
+      cerubis_method :foo, :bar, :baz
+
+      def foo; "Foo Method"; end
+      def bar; "Bar Method"; end
+      def baz; "Baz Method"; end
+    end
+
+    template_str = "<some-template-text>"
+    context      = { foo: Foo.new }
+
+    Cerubis.render(template_str, context)
+
 ## Testing
 
 You can run the tests in a few different ways. First, you've got your

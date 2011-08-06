@@ -1,38 +1,5 @@
 # Cerubis TODO
 
-## Limit available object methods
-
-At the moment any object in the template context have all methods
-exposed. I'm thinking about adding a class level method to `Object`
-like:
-
-    class Foo
-      cerubis :meth_1, :meth_2
-
-      def meth_1; end
-      def meth_2; end
-    end
-
-Or...
-
-    class Bar
-      cerubis_method :meth_1, :meth_2
-
-      def meth_1; end
-      def meth_2; end
-    end
-
-Another thought is to expose the methods through a module that can be
-included into any class you'd like to add to a context:
-
-    class Baz
-      include CerubisMethod
-      cerubis_method :meth_1, :meth_2
-
-      def meth_1; end
-      def meth_2; end
-    end
-
 ## Parse helpers
 
 I want to only make helpers available in output tags, `{{ .. }}`, so
