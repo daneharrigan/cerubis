@@ -33,6 +33,12 @@ class Cerubis
   end
 end
 
+# Patching Ruby core objects
+require 'cerubis/objects/array'
+require 'cerubis/objects/float'
+require 'cerubis/objects/fixnum'
+require 'cerubis/objects/string'
+
 Cerubis.register_block :if, Cerubis::Blocks::If
 Cerubis.register_block :unless, Cerubis::Blocks::Unless
 Cerubis.register_block :loop, Cerubis::Blocks::Loop

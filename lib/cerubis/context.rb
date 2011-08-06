@@ -15,7 +15,11 @@ class Cerubis
 					object_methods = key.split('.')
 					object = self[object_methods.shift.to_sym]
 					while meth = object_methods.shift do
-						object = object.respond_to?(meth) ? object.send(meth) : nil
+            if object.respond_to?(:cerubis_respond_to?) && object.cerubis_respond_to?(meth.to_sym)
+              object = object.send(meth)
+            else
+              object = nil
+            end
 					end
 
 					object

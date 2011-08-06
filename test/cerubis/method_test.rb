@@ -1,6 +1,15 @@
 require 'test_helper'
+require 'methods/test_array_methods'
+require 'methods/test_string_methods'
+require 'methods/test_float_methods'
+require 'methods/test_fixnum_methods'
 
 class Cerubis::MethodTest < MiniTest::Unit::TestCase
+  include TestArrayMethods
+  include TestStringMethods
+  include TestFloatMethods
+  include TestFixnumMethods
+
   def setup
     @obj = FooObj.new
   end
