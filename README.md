@@ -60,6 +60,11 @@ you need to make Cerubis aware of the methods it's allowed to call:
 
     Cerubis.render(template_str, context)
 
+Shown above, object methods are made available to Cerubis templates by
+indicating them with `cerubis_method`. The `cerubis_method` can have
+many method names passed to it and `cerubis_method` can be called
+multiple times.
+
 ## Testing
 
 You can run the tests in a few different ways. First, you've got your
