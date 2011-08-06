@@ -27,11 +27,11 @@ class Cerubis
       def build_nodes
         if !@blocks.empty?
           str_position = @blocks.first[1] # start of first block
-          @blocks.unshift([:text, 0, str_position-1]) unless str_position.zero?
+          @blocks.unshift([:text, 0, str_position.pred]) unless str_position.zero?
 
           str_position = @blocks.last[2] # end of last block
           if str_position != @content.size
-            @blocks << [:text, str_position+1, @content.size]
+            @blocks << [:text, str_position.next, @content.size]
           end
         end
 
@@ -41,7 +41,7 @@ class Cerubis
       def create_node(block)
         start_of_str = block[1]
         end_of_str   = block[2]
-        content      = @content[start_of_str...end_of_str]
+        content      = @content[start_of_str..end_of_str]
 
         if block[0] == :text
           @nodes << TextNode.new(content, @options)
@@ -86,7 +86,7 @@ class Cerubis
         if nested_block?
           @blocks << block_name
         else
-          @blocks << [block_name, @scanner.pos - @scanner.matched_size]
+          @blocks << [block_name, (@scanner.pos - @scanner.matched_size)]
         end
       end
 
@@ -97,7 +97,7 @@ class Cerubis
         if @blocks.last == block_name # found the nested closing block
           @blocks.pop
         elsif @blocks && @blocks.last.is_a?(Array) && @blocks.last[0] == block_name
-          @blocks.last << @scanner.pos
+          @blocks.last << @scanner.pos.pred
         end
       end
   end

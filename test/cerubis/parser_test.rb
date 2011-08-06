@@ -21,6 +21,12 @@ class Cerubis::ParserTest < MiniTest::Unit::TestCase
     assert_instance_of Cerubis::TextNode, nodes[2]
   end
 
+  def test_open_close_block_on_single_line
+    content = '<p>{{#if true}} Foo Content {{/if}}</p>'
+    nodes   = Cerubis::Parser.new(content, options).nodes
+    assert_equal '<p> Foo Content </p>', nodes.map(&:render).join.strip
+  end
+
   def test_exception_raised_if_closing_block_is_found_without_an_opening
     assert_raises(Cerubis::SyntaxError) do
       content = '{{/if}}'
