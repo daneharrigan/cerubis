@@ -11,10 +11,6 @@ module TestOperators
     assert_includes Cerubis::Matcher::Operators, :'!='
   end
 
-  def test_not_double_equals
-    assert_includes Cerubis::Matcher::Operators, :'!=='
-  end
-
   def test_less_than
     assert_includes Cerubis::Matcher::Operators, :<
   end
