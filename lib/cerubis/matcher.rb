@@ -3,7 +3,8 @@ class Cerubis
     OpenTag       = '{{'
     CloseTag      = '}}'
     BlockName     = '[a-z_]+'
-    ObjectMethod  = '[a-z0-9_]+((\.[a-z_0-9]+\??)+)?'
+    Method        = '[a-z_0-9]+'
+    ObjectMethod  = /\'([^\']*)\'|[a-z0-9_]+((\.#{Method}\??)+)?/
     Operators     = [:==, :===, :'!=', :'!==', :<, :>, :<=, :>=, :in]
     Conditions    = /(#{ObjectMethod})(\s*(#{Operators.join('|')})\s*(#{ObjectMethod}))?/
     OpenBlockStr  = "#{OpenTag}\#(#{BlockName})(\s+#{Conditions})?#{CloseTag}"
@@ -11,6 +12,7 @@ class Cerubis
     CloseBlockStr = CloseBlockPlaceholder.sub('block_name', BlockName)
     OpenBlock     = /#{OpenBlockStr}/
     CloseBlock    = /#{CloseBlockStr}/
-    Variable      = /#{OpenTag}\s*(#{ObjectMethod})\s*#{CloseTag}/
+    Helper        = /(#{Method}\()+#{ObjectMethod}(,\s*#{ObjectMethod})*?\)+$/
+    Variable      = /#{OpenTag}\s*(#{Method}\()*(#{ObjectMethod})((\,\s*#{ObjectMethod})*)?\)*\s*#{CloseTag}/
   end
 end

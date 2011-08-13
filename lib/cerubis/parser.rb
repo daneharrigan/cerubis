@@ -92,7 +92,7 @@ class Cerubis
 
       def parse_close_block
         raise SyntaxError, 'Closing block was found without an opening' if @blocks.empty?
-        block_name = @scanner[13].to_sym
+        block_name = @scanner[15].to_sym
 
         if @blocks.last == block_name # found the nested closing block
           @blocks.pop

@@ -1,5 +1,16 @@
 # Cerubis TODO
 
+## Allow quoted strings and floats in Cerubis::Matcher::ObjectMethod
+
+The `ObjectMethod` regex matches single objects like `foo`, integers `1`
+and objects with methods `foo.method` as well as `foo.method?`. Yep, I
+like the use of the ending question mark so I allow it.
+
+Unfortunately though, `ObjectMethod` doesn't allow floats `1.0` and it
+doesn't allow for quoted strings like `"Foo String"` or single quotes
+`'Foo String'`. I think it makes the most sense to only allow single
+quotes because the strings will not be evaulated.
+
 ## Parse helpers
 
 I want to only make helpers available in output tags, `{{ .. }}`, so

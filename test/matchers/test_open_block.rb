@@ -47,6 +47,10 @@ module TestOpenBlock
     refute_match '{{#if .item}}', Cerubis::Matcher::OpenBlock
   end
 
+  def test_match_if_with_string
+    assert_match "{{#if 'item' == 'item'}}", Cerubis::Matcher::OpenBlock
+  end
+
   def test_loop_syntax
     assert_match '{{#loop child in root.children}}', Cerubis::Matcher::OpenBlock
   end

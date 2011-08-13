@@ -26,7 +26,7 @@ class Cerubis
     private
       def define_condition!
         match = content.match Matcher::Conditions
-        @parsed_content = [match[1], match[5], match[6]].compact
+        @parsed_content = [match[1], match[6], match[7]].compact
       end
 
       def validate_object
