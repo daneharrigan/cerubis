@@ -23,20 +23,23 @@ module TestVariable
     assert_match '{{ object.attribute.attr2 }}', Cerubis::Matcher::Variable
   end
 
-  def test_helper_with_object
+  def test_variable_helper_with_object
     assert_match '{{ helper(object) }}', Cerubis::Matcher::Variable
   end
 
-  def test_helper_with_multiple_objecst
+  def test_variable_helper_with_multiple_objecst
     assert_match '{{ helper(object, 1) }}', Cerubis::Matcher::Variable
   end
 
-  def test_helper_with_within_a_helper
+  def test_variable_helper_with_within_a_helper
     assert_match '{{ helper(helper(object)) }}', Cerubis::Matcher::Variable
   end
 
-  def test_helper_and_object_with_within_a_helper
-    skip 'regex does not support nesting helpers yet'
+  def test_variable_helper_and_object_with_within_a_helper
     assert_match '{{ helper(helper(object), 1) }}', Cerubis::Matcher::Variable
+  end
+
+  def test_variable_helper_with_string
+    assert_match "{{ foo_helper('foo title', obj) }}", Cerubis::Matcher::Variable
   end
 end
