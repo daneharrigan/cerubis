@@ -12,9 +12,8 @@ class Cerubis
     CloseBlockStr = CloseBlockPlaceholder.sub('block_name', BlockName)
     OpenBlock     = /#{OpenBlockStr}/
     CloseBlock    = /#{CloseBlockStr}/
-    OpenHelper    = /#{Method}\(/
-    CloseHelper   = /\)/
-    Helper        = /(#{OpenHelper})+(#{OpenHelper}|#{CloseHelper}|#{ObjectMethod})+(,\s*(#{OpenHelper}|#{CloseHelper}|#{ObjectMethod}))*#{CloseHelper}+/
-    Variable      = /#{OpenTag}\s*(#{Helper}|#{ObjectMethod})\s*#{CloseTag}/
+    Helpers       = /(#{Method})\s+(#{ObjectMethod}+(,\s+#{ObjectMethod})*)/
+    Variable      = /#{OpenTag}\s*(#{Helpers}|#{ObjectMethod})\s*#{CloseTag}/
+    CommaOutsideQuote = /,(?=(?:[^']|'[^']*')*$)/
   end
 end

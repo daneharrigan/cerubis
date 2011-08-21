@@ -1,37 +1,22 @@
 # Cerubis TODO
 
-## Allow quoted strings and floats in Cerubis::Matcher::ObjectMethod
-
-The `ObjectMethod` regex matches single objects like `foo`, integers `1`
-and objects with methods `foo.method` as well as `foo.method?`. Yep, I
-like the use of the ending question mark so I allow it.
-
-Unfortunately though, `ObjectMethod` doesn't allow floats `1.0` and it
-doesn't allow for quoted strings like `"Foo String"` or single quotes
-`'Foo String'`. I think it makes the most sense to only allow single
-quotes because the strings will not be evaulated.
-
 ## Parse helpers
 
 I want to only make helpers available in output tags, `{{ .. }}`, so
 that means they cant be used in opening blocks.
 
-I unsure whether or not parenthesis should be required, optional or even
-possible. I think I'd like to start going down the road of requiring
-them and if I can easily make them optional then offer that.
+I decided on not allowing parenthesis which makes nesting helpers pretty
+difficult so I don't want to allow that either.
 
-Here is a single helper example:
+Here is a helper example:
 
     <header>
-      <h1>{{ uppercase(page.title) }}</h1>
+      <h1>{{ uppercase page.title }}</h1>
     </header>
 
-And here's a few:
+Or without surrounding spaces:
 
-    {{ foo(bar(baz(page.title))) }}
-
-The parenthesis can get a little ridiculous if you nest multiple
-helpers. I can't see use case for this, but I want it to be possible.
+    {{upcase page.title}}
 
 ## Make helpers available to templates
 

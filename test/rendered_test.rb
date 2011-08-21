@@ -1,14 +1,14 @@
 require 'test_helper'
 
 class RenderedTest < MiniTest::Unit::TestCase
-  def test_parse_single_block
+  def test_render_single_block
     template = Cerubis.render(content)
     html = Capybara::Node::Simple.new(template.to_html)
 
     assert html.has_selector?('body > section', text: 'Foo Content')
   end
 
-  def test_parse_nested_blocks
+  def test_render_nested_blocks
     template = Cerubis.render(nested_content)
     html = Capybara::Node::Simple.new(template.to_html)
 
@@ -19,7 +19,7 @@ class RenderedTest < MiniTest::Unit::TestCase
     refute_match /\{\{/, template.to_html
   end
 
-  def test_parse_unless_block
+  def test_render_unless_block
     template = Cerubis.render(hidden_content)
     html = Capybara::Node::Simple.new(template.to_html)
 
@@ -27,12 +27,20 @@ class RenderedTest < MiniTest::Unit::TestCase
     refute_match /\{\{/, template.to_html
   end
 
-  def test_parse_loop_block
+  def test_render_loop_block
+    $BREAK = true
     template = Cerubis.render(loop_content, collection: [1,2,3])
     html = Capybara::Node::Simple.new(template.to_html)
 
-    assert html.has_selector?('body > p', text: 'Loop Content', count: 3)
+    assert html.has_selector?('p', text: 'Loop Content: 1')
+    assert html.has_selector?('p', text: 'Loop Content: 2')
+    assert html.has_selector?('p', text: 'Loop Content: 3')
     refute_match /\{\{/, template.to_html
+  end
+
+  def test_render_foo_helper
+    template = Cerubis.render(helper_content, item: 'Item Value')
+    assert_equal '<p>*Foo* Item Value *Foo*</p>', template.to_html.strip
   end
 
   private
@@ -79,9 +87,15 @@ class RenderedTest < MiniTest::Unit::TestCase
       <<-STR
       <body>
       {{#loop item in collection}}
-        <p>Loop Content</p>
+        <p>Loop Content: {{ item }}</p>
       {{/loop}}
       </body>
+      STR
+    end
+
+    def helper_content
+      <<-STR
+        <p>{{ foo_helper item }}</p>
       STR
     end
 end

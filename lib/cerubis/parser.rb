@@ -33,6 +33,8 @@ class Cerubis
           if str_position != @content.size
             @blocks << [:text, str_position.next, @content.size]
           end
+        elsif !@content.empty?
+          @blocks << [:text, 0, @content.size]
         end
 
         create_node(@blocks.shift) until @blocks.empty?

@@ -22,11 +22,4 @@ class Cerubis::Blocks::LoopTest < MiniTest::Unit::TestCase
   def test_block_condition_is_true
     assert @block.true?
   end
-
-  def test_rendered_block
-    html = Capybara::Node::Simple.new(@output)
-    assert html.has_selector?('p', text: '1')
-    assert html.has_selector?('p', text: '2')
-    assert html.has_selector?('p', text: '3')
-  end
 end
