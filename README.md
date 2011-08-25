@@ -65,6 +65,29 @@ indicating them with `cerubis_method`. The `cerubis_method` can have
 many method names passed to it and `cerubis_method` can be called
 multiple times.
 
+## Template Helpers
+
+Template helpers are meant to add convienence methods to your code.
+Below you see how simple it is to add a helper and to use it in your
+template:
+
+    # Adding a new helper
+    module FooHelper
+      def foo_helper(name, value)
+        "My name is #{name} and my value is #{value}"
+      end
+    end
+
+    Cerubis.register_helper FooHelper
+
+    # Using the helper
+    content = <<-STR
+      Hello {{ foo_helper 'John Doe', '12' }}
+    STR
+
+    template = Cerubis.render(content)
+    template.to_html
+
 ## Testing
 
 You can run the tests in a few different ways. First, you've got your
