@@ -14,14 +14,23 @@ class Cerubis
   autoload :Condition,   'cerubis/condition'
   autoload :Context,     'cerubis/context'
   autoload :Method,      'cerubis/method'
+  autoload :Helper,      'cerubis/helper'
   autoload :SyntaxError, 'cerubis/syntax_error'
 
   def self.register_block(name, klass)
     blocks[name] = klass
   end
 
+  def self.register_helper(mod)
+    helpers << mod
+  end
+
   def self.blocks
     @blocks ||= {}
+  end
+
+  def self.helpers
+    @helpers ||= []
   end
 
   def self.render(template, context={})

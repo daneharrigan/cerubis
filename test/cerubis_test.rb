@@ -10,7 +10,15 @@ class CerubisTest < MiniTest::Unit::TestCase
   end
 
   def test_helpers_returns_array
-    skip 'Not storing helpers yet'
     assert_instance_of Array, Cerubis.helpers
+  end
+
+  def test_helpers_contains_registered_helpers
+    Cerubis.register_helper FooMod
+    assert_includes Cerubis.helpers,  FooMod
+  end
+
+  module FooMod
+    def foo_mod; end
   end
 end

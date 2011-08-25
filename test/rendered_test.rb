@@ -28,7 +28,6 @@ class RenderedTest < MiniTest::Unit::TestCase
   end
 
   def test_render_loop_block
-    $BREAK = true
     template = Cerubis.render(loop_content, collection: [1,2,3])
     html = Capybara::Node::Simple.new(template.to_html)
 
@@ -39,8 +38,22 @@ class RenderedTest < MiniTest::Unit::TestCase
   end
 
   def test_render_foo_helper
+    Cerubis.register_helper FooHelper
     template = Cerubis.render(helper_content, item: 'Item Value')
-    assert_equal '<p>*Foo* Item Value *Foo*</p>', template.to_html.strip
+    assert_equal '<p>** Item Value **</p>', template.to_html.strip
+  end
+
+  def test_helper_syntax_error
+    assert_raises Cerubis::SyntaxError do
+      Cerubis.register_helper FooHelper
+      template = Cerubis.render(helper_content_error)
+      template.to_html
+    end
+  end
+
+  def test_render_static_content
+    template = Cerubis.render(static_content)
+    assert_equal '<p>Static Content</p>', template.to_html.strip
   end
 
   private
@@ -97,5 +110,23 @@ class RenderedTest < MiniTest::Unit::TestCase
       <<-STR
         <p>{{ foo_helper item }}</p>
       STR
+    end
+
+    def helper_content_error
+      <<-STR
+      {{ foo_helper 'bar', 'baz' }}
+      STR
+    end
+
+    def static_content
+      <<-STR
+        <p>Static Content</p>
+      STR
+    end
+
+    module FooHelper
+      def foo_helper(value)
+        "** #{value} **"
+      end
     end
 end

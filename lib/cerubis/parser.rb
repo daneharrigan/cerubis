@@ -33,7 +33,7 @@ class Cerubis
           if str_position != @content.size
             @blocks << [:text, str_position.next, @content.size]
           end
-        elsif !@content.empty?
+        elsif !@content.empty? && @options[:parent].is_a?(Template)
           @blocks << [:text, 0, @content.size]
         end
 
