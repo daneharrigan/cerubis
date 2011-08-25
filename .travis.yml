@@ -1,6 +1,7 @@
 bundler_args: --without development
 rvm:
   - 1.9.2
+  - 1.9.3
   - ruby-head
   - jruby
 script: "ruby -Itest:lib test/all.rb"
