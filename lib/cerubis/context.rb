@@ -11,6 +11,7 @@ class Cerubis
 				when /^false$/  then false
 				when /^[0-9]+$/ then Integer(key)
 				when /^[0-9]+\.[0-9]+$/ then Float(key)
+        when /^'.*'$/ then key[1..-2]
 				else
 					object_methods = key.split('.')
 					object = self[object_methods.shift.to_sym]

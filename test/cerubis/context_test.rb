@@ -25,4 +25,9 @@ class Cerubis::ContextTest < MiniTest::Unit::TestCase
 		context = Cerubis::Context.new(item: :foo)
 		assert_equal :foo, context.get('item')
 	end
+
+	def test_context_returns_string_without_single_quotes
+		context = Cerubis::Context.new
+		assert_equal 'foo', context.get("'foo'")
+	end
 end
