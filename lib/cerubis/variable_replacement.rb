@@ -11,7 +11,7 @@ class Cerubis
 
           begin
             helper = Helper.new
-            helper.send(helper_method, *helper_args)
+            helper.public_send(helper_method, *helper_args)
           rescue ArgumentError
             raise SyntaxError, "A wrong number of arguments were passed to '#{helper_method}'"
           end
