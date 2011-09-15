@@ -19,3 +19,5 @@ once. Approach this with a DCI style.
 
     # multiple helpers in one module
     Cerubis.register_helper :foo_helper, :bar_helper, GroupHelper
+
+Switch hash syntax from 1.9 to 1.8 for support on all Ruby VMs
