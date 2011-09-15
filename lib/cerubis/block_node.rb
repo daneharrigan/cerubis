@@ -28,7 +28,7 @@ class Cerubis
         condition_str = open_block[4]
 
         content.sub!(/^#{open_block[0]}/, open_block[1])
-        content.sub!(/#{close_block}+\z/,'')
+        content.sub!(/#{close_block}+\Z/,'')
 
         options = { context: context, node: self, condition: condition_str, type: block_name }
         self.block = blocks[block_name].new(options)
