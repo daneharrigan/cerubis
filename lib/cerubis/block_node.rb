@@ -23,11 +23,12 @@ class Cerubis
 
       def define_node!
         open_block    = content.match(/^([\s\t]*)(#{Matcher::OpenBlock})/m)
+        close_block   = Matcher::CloseBlockPlaceholder.sub('block_name', open_block[3])
         block_name    = open_block[3].to_sym
         condition_str = open_block[4]
 
         content.sub!(/^#{open_block[0]}/, open_block[1])
-        content.sub!(/#{Matcher::CloseBlock}$/,'')
+        content.sub!(/#{close_block}+\z/,'')
 
         options = { context: context, node: self, condition: condition_str, type: block_name }
         self.block = blocks[block_name].new(options)

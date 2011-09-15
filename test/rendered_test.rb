@@ -19,6 +19,17 @@ class RenderedTest < MiniTest::Unit::TestCase
     refute_match /\{\{/, template.to_html
   end
 
+  def test_render_loop_nested_blocks
+    template = Cerubis.render(loop_nested_content, collection: [1,2,3])
+    html = Capybara::Node::Simple.new(template.to_html)
+
+    assert html.has_selector?('body > header > ul > li', text: '1')
+    assert html.has_selector?('body > header > ul > li', text: '2')
+    assert html.has_selector?('body > header > ul > li', text: '3')
+
+    refute_match /\{\{/, template.to_html
+  end
+
   def test_render_unless_block
     template = Cerubis.render(hidden_content)
     html = Capybara::Node::Simple.new(template.to_html)
@@ -73,16 +84,32 @@ class RenderedTest < MiniTest::Unit::TestCase
           <header>
           {{#if true}}
             <h1>Header Content</h1>
-            {{#if true}}
-              <section>
-                {{#if true}}
-                  <p>{{#if true}} Paragraph Content {{/if}}</p>
-                {{/if}}
-              </section>
-            {{/if}}
+            <section>
+              {{#unless false}}
+                <p>{{#if true}} Paragraph Content {{/if}}</p>
+              {{/unless}}
+            </section>
           {{/if}}
           </header>
         </body>
+      STR
+    end
+
+    def loop_nested_content
+      <<-STR
+      <body>
+        {{#if true}}
+          <header>
+            {{#unless false}}
+              <ul>
+                {{#loop item in collection}}
+                  <li>{{item}}</li>
+                {{/loop}}
+              </ul>
+            {{/unless}}
+          </header>
+        {{/if}}
+      </body>
       STR
     end
 

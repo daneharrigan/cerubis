@@ -19,7 +19,7 @@ class Cerubis
         @blocks = []
 
         record_positions until @scanner.eos?
-        raise SyntaxError, "An open block is not closed" if blocks_not_closed?
+        raise SyntaxError, "An open '#{last_block_name}' block is not closed" if blocks_not_closed?
 
         build_nodes
       end
@@ -32,6 +32,19 @@ class Cerubis
           str_position = @blocks.last[2] # end of last block
           if str_position != @content.size
             @blocks << [:text, str_position.next, @content.size]
+          end
+
+          # loop and fill in missing ranges with text nodes
+          @blocks.each_with_index do |block, index|
+            next_block = @blocks[index.next]
+            position   = block[2]
+
+            if next_block && next_block[1] != position.next
+              next_index        = index.next
+              previous_position = next_block[1].pred
+
+              @blocks.insert(next_index, [:text, position.next, previous_position])
+            end
           end
         elsif !@content.empty? && @options[:parent].is_a?(Template)
           @blocks << [:text, 0, @content.size]
@@ -69,7 +82,7 @@ class Cerubis
 
       def nested_block?
         return false if @blocks.empty?
-        return false if @blocks.last.is_a?(Array) && @blocks.last.size == 3
+        return false if @blocks.last.is_a?(Array) && @blocks.last.size === 3
         true
       end
 
@@ -82,8 +95,6 @@ class Cerubis
 
       def parse_open_block
         block_name = @scanner[2].to_sym
-        close_regex = Matcher::CloseBlockPlaceholder.sub('block_name', @scanner[2])
-        @current_regex = Regexp.new("(#{Matcher::OpenBlock})|(#{close_regex})")
 
         if nested_block?
           @blocks << block_name
@@ -98,9 +109,17 @@ class Cerubis
 
         if @blocks.last == block_name # found the nested closing block
           @blocks.pop
+
+          close_regex    = Matcher::CloseBlockPlaceholder.sub('block_name', last_block_name.to_s)
+          @current_regex = Regexp.new("(#{Matcher::OpenBlock})|(#{close_regex})")
         elsif @blocks && @blocks.last.is_a?(Array) && @blocks.last[0] == block_name
           @blocks.last << @scanner.pos.pred
+          @current_regex = @default_regex
         end
+      end
+
+      def last_block_name
+        @blocks.last.is_a?(Array) ? @blocks.last[0] : @blocks.last
       end
   end
 end
