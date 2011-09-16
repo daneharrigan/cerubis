@@ -49,14 +49,14 @@ class RenderedTest < MiniTest::Unit::TestCase
   end
 
   def test_render_foo_helper
-    Cerubis.register_helper FooHelper
+    Cerubis.register_helper :foo_helper, FooHelper
     template = Cerubis.render(helper_content, item: 'Item Value')
     assert_equal '<p>** Item Value **</p>', template.to_html.strip
   end
 
   def test_helper_syntax_error
     assert_raises Cerubis::SyntaxError do
-      Cerubis.register_helper FooHelper
+      Cerubis.register_helper :foo_helper, FooHelper
       template = Cerubis.render(helper_content_error)
       template.to_html
     end
