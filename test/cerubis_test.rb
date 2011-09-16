@@ -10,15 +10,22 @@ class CerubisTest < MiniTest::Unit::TestCase
   end
 
   def test_helpers_returns_array
-    assert_instance_of Array, Cerubis.helpers
+    assert_instance_of Hash, Cerubis.helpers
   end
 
-  def test_helpers_contains_registered_helpers
-    Cerubis.register_helper FooMod
-    assert_includes Cerubis.helpers,  FooMod
+  def test_helpers_contains_single_registered_helper
+    Cerubis.register_helper :foo_helper, FooMod
+    assert_equal FooMod, Cerubis.helpers[:foo_helper]
+  end
+
+  def test_helpers_contains_multiple_registered_helpers
+    Cerubis.register_helper :foo_helper, :bar_helper, FooMod
+    assert_equal FooMod, Cerubis.helpers[:foo_helper]
+    assert_equal FooMod, Cerubis.helpers[:bar_helper]
   end
 
   module FooMod
-    def foo_mod; end
+    def foo_helper; end
+    def bar_helper; end
   end
 end

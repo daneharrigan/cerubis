@@ -21,8 +21,9 @@ class Cerubis
     blocks[name] = klass
   end
 
-  def self.register_helper(mod)
-    helpers << mod
+  def self.register_helper(*mods)
+    mod = mods.pop
+    mods.each { |key| helpers[key] = mod }
   end
 
   def self.blocks
@@ -30,7 +31,7 @@ class Cerubis
   end
 
   def self.helpers
-    @helpers ||= []
+    @helpers ||= {}
   end
 
   def self.render(template, context={})
