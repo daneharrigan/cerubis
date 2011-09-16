@@ -1,12 +1,12 @@
 bundler_args: --without development
 rvm:
-  - 1.8.7
+  #- 1.8.7
   - 1.9.2
   - 1.9.3
   - jruby
   - rbx
   - rbx-2.0
-  - ree
+  #- ree
   - ruby-head
 script: "ruby -Itest:lib test/all.rb"
 branches:
