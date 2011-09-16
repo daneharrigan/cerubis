@@ -7,7 +7,7 @@ class Cerubis
     def initialize(content, context={})
       @content = content
       @context = Context.new(context)
-      @nodes   = Parser.new(@content, parent: self).nodes
+      @nodes   = Parser.new(@content, :parent => self).nodes
     end
 
     def compile

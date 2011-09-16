@@ -4,8 +4,8 @@ class Cerubis
   class Parser
     attr :nodes
 
-    def initialize(content='', options)
-      @content = content
+    def initialize(content, options)
+      @content = content || ''
       @options = options
       @scanner = StringScanner.new(@content)
       @nodes   = []

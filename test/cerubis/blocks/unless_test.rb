@@ -3,14 +3,14 @@ require 'test_helper'
 class Cerubis::Blocks::UnlessTest < MiniTest::Unit::TestCase
   def setup
 		context = Cerubis::Context.new
-    parent  = StubObject.new(context: context)
+    parent  = StubObject.new(:context => context)
     content = <<-STR
     {{#unless false}}
       Foo Content
     {{/unless}}
     STR
 
-    node    = Cerubis::BlockNode.new(content, parent: parent)
+    node    = Cerubis::BlockNode.new(content, :parent => parent)
     @output = node.render
     @block  = node.block
   end

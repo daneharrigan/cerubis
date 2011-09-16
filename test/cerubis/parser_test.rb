@@ -43,6 +43,6 @@ class Cerubis::ParserTest < MiniTest::Unit::TestCase
 
   private
     def options
-      { parent: StubObject.new }
+      { :parent => StubObject.new }
     end
 end

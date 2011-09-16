@@ -2,15 +2,15 @@ require 'test_helper'
 
 class Cerubis::Blocks::LoopTest < MiniTest::Unit::TestCase
   def setup
-    context = Cerubis::Context.new(items: [1,2,3])
-    parent  = StubObject.new(context: context)
+    context = Cerubis::Context.new(:items => [1,2,3])
+    parent  = StubObject.new(:context => context)
     content = <<-STR
     {{#loop item in items}}
       <p>{{ item }}</p>
     {{/loop}}
     STR
 
-    node    = Cerubis::BlockNode.new(content, parent: parent)
+    node    = Cerubis::BlockNode.new(content, :parent => parent)
     @output = node.render
     @block  = node.block
   end

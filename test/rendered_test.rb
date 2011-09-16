@@ -5,27 +5,27 @@ class RenderedTest < MiniTest::Unit::TestCase
     template = Cerubis.render(content)
     html = Capybara::Node::Simple.new(template.to_html)
 
-    assert html.has_selector?('body > section', text: 'Foo Content')
+    assert html.has_selector?('body > section', :text => 'Foo Content')
   end
 
   def test_render_nested_blocks
     template = Cerubis.render(nested_content)
     html = Capybara::Node::Simple.new(template.to_html)
 
-    assert html.has_selector?('body > header > h1', text: 'Header Content')
-    assert html.has_selector?('body > header > section > p', text: 'Paragraph Content')
+    assert html.has_selector?('body > header > h1', :text => 'Header Content')
+    assert html.has_selector?('body > header > section > p', :text => 'Paragraph Content')
 
-    refute html.has_selector?('body > header > #hidden', text: 'Hidden Content')
+    refute html.has_selector?('body > header > #hidden', :text => 'Hidden Content')
     refute_match /\{\{/, template.to_html
   end
 
   def test_render_loop_nested_blocks
-    template = Cerubis.render(loop_nested_content, collection: [1,2,3])
+    template = Cerubis.render(loop_nested_content, :collection => [1,2,3])
     html = Capybara::Node::Simple.new(template.to_html)
 
-    assert html.has_selector?('body > header > ul > li', text: '1')
-    assert html.has_selector?('body > header > ul > li', text: '2')
-    assert html.has_selector?('body > header > ul > li', text: '3')
+    assert html.has_selector?('body > header > ul > li', :text => '1')
+    assert html.has_selector?('body > header > ul > li', :text => '2')
+    assert html.has_selector?('body > header > ul > li', :text => '3')
 
     refute_match /\{\{/, template.to_html
   end
@@ -34,23 +34,23 @@ class RenderedTest < MiniTest::Unit::TestCase
     template = Cerubis.render(hidden_content)
     html = Capybara::Node::Simple.new(template.to_html)
 
-    refute html.has_selector?('body > #hidden', text: 'Hidden Content')
+    refute html.has_selector?('body > #hidden', :text => 'Hidden Content')
     refute_match /\{\{/, template.to_html
   end
 
   def test_render_loop_block
-    template = Cerubis.render(loop_content, collection: [1,2,3])
+    template = Cerubis.render(loop_content, :collection => [1,2,3])
     html = Capybara::Node::Simple.new(template.to_html)
 
-    assert html.has_selector?('p', text: 'Loop Content: 1')
-    assert html.has_selector?('p', text: 'Loop Content: 2')
-    assert html.has_selector?('p', text: 'Loop Content: 3')
+    assert html.has_selector?('p', :text => 'Loop Content: 1')
+    assert html.has_selector?('p', :text => 'Loop Content: 2')
+    assert html.has_selector?('p', :text => 'Loop Content: 3')
     refute_match /\{\{/, template.to_html
   end
 
   def test_render_foo_helper
     Cerubis.register_helper :foo_helper, FooHelper
-    template = Cerubis.render(helper_content, item: 'Item Value')
+    template = Cerubis.render(helper_content, :item => 'Item Value')
     assert_equal '<p>** Item Value **</p>', template.to_html.strip
   end
 

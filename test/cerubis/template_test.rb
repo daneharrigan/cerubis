@@ -9,7 +9,7 @@ class Cerubis::TemplateTest < MiniTest::Unit::TestCase
   end
 
   def test_returns_template_context
-    context  = { foo: true, bar: false}
+    context  = { :foo => true, :bar => false}
     template = Cerubis::Template.new('', context)
 
     assert_equal context[:foo], template.context[:foo]

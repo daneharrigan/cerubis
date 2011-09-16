@@ -22,7 +22,7 @@ class Cerubis::ContextTest < MiniTest::Unit::TestCase
 	end
 
 	def test_context_returns_item_from_context
-		context = Cerubis::Context.new(item: :foo)
+		context = Cerubis::Context.new(:item => :foo)
 		assert_equal :foo, context.get('item')
 	end
 

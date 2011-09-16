@@ -11,7 +11,7 @@ class Cerubis::BlockNodeTest < MiniTest::Unit::TestCase
     {{/if}}
     STR
 
-    node = Cerubis::BlockNode.new(content, parent: StubObject.new)
+    node = Cerubis::BlockNode.new(content, :parent => StubObject.new)
     refute_match /\{\{/, node.render
   end
 
@@ -25,7 +25,7 @@ class Cerubis::BlockNodeTest < MiniTest::Unit::TestCase
     node = Cerubis::BlockNode.new(content, options)
     html = Capybara::Node::Simple.new(node.render)
 
-    assert html.has_selector?('h1', text: 'Foo Title')
+    assert html.has_selector?('h1', :text => 'Foo Title')
     refute_match /\{\{/, node.render
   end
 

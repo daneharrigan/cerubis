@@ -7,7 +7,7 @@ class Cerubis
 
     def initialize(options)
       @node = options[:node]
-      @condition = Condition.new(options[:condition], context: node.context, type: options[:type])
+      @condition = Condition.new(options[:condition], :context => node.context, :type => options[:type])
     end
 
     def true?

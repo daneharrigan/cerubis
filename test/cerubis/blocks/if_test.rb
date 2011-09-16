@@ -9,7 +9,7 @@ class Cerubis::Blocks::IfTest < MiniTest::Unit::TestCase
     {{/if}}
     STR
 
-    node    = Cerubis::BlockNode.new(content, parent: parent)
+    node    = Cerubis::BlockNode.new(content, :parent => parent)
     @output = node.render
     @block  = node.block
   end
