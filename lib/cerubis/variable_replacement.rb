@@ -5,18 +5,17 @@ class Cerubis
         match_var = variable.match(Matcher::Variable)[1]
         if match = match_var.match(Matcher::Helpers)
           helper_method = match[1]
-          helper_method_sym = helper_method.to_sym
           helper_args   = match[2].to_s.split(Matcher::CommaOutsideQuote).map do |arg|
             ctx.get(arg.strip)
           end
 
           begin
-            if helper_mod = Cerubis.helpers[helper_method_sym]
+            if helper_mod = Cerubis.helpers[helper_method.to_sym] || Cerubis.helpers[helper_method]
               helper = Helper.new
               helper.extend helper_mod
 
-              if helper.public_methods.include? helper_method
-                helper.send(helper_method_sym, *helper_args)
+              if has_public_method?(helper, helper_method)
+                helper.send(helper_method, *helper_args)
               end
             end
           rescue ArgumentError
@@ -26,6 +25,10 @@ class Cerubis
           ctx.get(match_var)
         end
       end
+    end
+
+    def has_public_method?(obj, meth)
+      obj.public_methods.include?(meth) || obj.public_methods.include?(meth.to_sym)
     end
   end
 end
