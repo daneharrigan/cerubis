@@ -11,7 +11,7 @@ class Cerubis
 
           begin
             if helper_mod = Cerubis.helpers[helper_method.to_sym] || Cerubis.helpers[helper_method]
-              helper = Helper.new
+              helper = Helper.new(ctx)
               helper.extend helper_mod
 
               if has_public_method?(helper, helper_method)

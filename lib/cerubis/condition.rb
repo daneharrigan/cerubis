@@ -7,7 +7,7 @@ class Cerubis
     attr :parsed_content
 
     def initialize(content, options={})
-      @content = content.strip
+      @content = content.to_s.strip
       @context = options[:context]
       @type    = options[:type]
       @context_objects = []
@@ -26,7 +26,7 @@ class Cerubis
     private
       def define_condition!
         match = content.match Matcher::Conditions
-        @parsed_content = [match[1], match[6], match[7]].compact
+        @parsed_content = match ? [match[1], match[6], match[7]].compact : []
       end
 
       def validate_object

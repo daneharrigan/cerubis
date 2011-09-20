@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+  <head>
+    {{stylesheet_link_tag 'main'}}
+    {{javascript_include_tag 'main'}}
+    <title>{{page.title}} | {{site.title}}</title>
+    {{#script}}
+      var name = '{{page.title}}';
+      console.log('Page loaded: ' + name);
+    {{/script}}
+  </head>
+  <body>
+    {{include 'header'}}
+    <div id="container">
+      <div id="content">
+        <h1>{{page.title}}</h1>
+        {{#if site.homepage === page}}
+        <h2>Welcome to {{page.title}}!</h2>
+        {{/if}}
+      </div>
+      <aside>
+        <ul>
+          {{#loop item in page.subpages}}
+            <li>{{link_to item.title, item.permalink}}</li>
+          {{/loop}}
+        </ul>
+      </aside>
+    </div>
+    {{include 'footer'}}
+  </body>
+</html>

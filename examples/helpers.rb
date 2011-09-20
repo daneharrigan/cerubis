@@ -18,5 +18,5 @@ content = <<-STR
 2: {{ link_to 'About Us', '/about-us' }}
 STR
 
-Cerubis.register_helper LinkTo
+Cerubis.register_helper :link_to, LinkTo
 puts Cerubis.render(content, page: page)

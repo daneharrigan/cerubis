@@ -6,5 +6,5 @@ content = <<-STR
   You are {{age}} years old today
 STR
 
-template = Cerubis.render(content, name: 'John Smith', age: 26)
+template = Cerubis.render(content, name: 'Dane Harrigan', age: 26)
 puts template.to_html
