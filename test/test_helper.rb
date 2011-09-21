@@ -1,6 +1,11 @@
 require 'rubygems'
 require 'bundler/setup'
-require 'cover_me'
+
+begin
+  require 'cover_me'
+rescue LoadError
+end
+
 require 'minitest/autorun'
 require 'cerubis'
 

@@ -10,5 +10,5 @@ end
 group :test do
   gem 'capybara'
   gem 'minitest', '>= 2.5'
-  gem 'cover_me'
+  gem 'cover_me', :platform => :mri_19
 end

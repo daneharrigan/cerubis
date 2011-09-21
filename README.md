@@ -96,11 +96,9 @@ standard ruby way:
     ruby -Ilib:test test/cerubis_test.rb
     ruby -Ilib:test test/all.rb
 
-Or you can use a few Thor commands:
+Or you can run them all with Rake:
 
-    thor test:file cerubis
-    thor test:file cerubis/matcher
-    thor test:all
+    rake test
 
 ## Code Coverage
 
