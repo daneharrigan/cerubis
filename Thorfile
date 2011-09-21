@@ -9,4 +9,12 @@ class Test < Thor
   def all
     invoke :file, ['all']
   end
+
+  desc :coverage, 'Generate test coverage report'
+  def coverage
+    require 'cover_me'
+
+    invoke(:all)
+    CoverMe.complete!
+  end
 end

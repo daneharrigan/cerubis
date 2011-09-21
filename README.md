@@ -102,6 +102,12 @@ Or you can use a few Thor commands:
     thor test:file cerubis/matcher
     thor test:all
 
+## Code Coverage
+
+The [cover_me][4] gem has been added to the project. If you'd like to see
+the current coverage just run `thor test:coverage`.
+
 [1]: http://github.com/shopify/liquid
 [2]: http://github.com/defunkt/mustache
 [3]: https://secure.travis-ci.org/daneharrigan/cerubis
+[4]: https://github.com/markbates/cover_me
