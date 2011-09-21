@@ -7,7 +7,7 @@ class Cerubis
       @render ||= begin
         define_node!
         parse!
-        block.render
+        block.render { pre_render }
       end
     end
 
@@ -31,11 +31,7 @@ class Cerubis
         content.sub!(/#{close_block}+\Z/,'')
 
         options = { :context => context, :node => self, :condition => condition_str, :type => block_name }
-        self.block = blocks[block_name].new(options)
-      end
-
-      def blocks
-        Cerubis.blocks
+        self.block = Cerubis.blocks[block_name].new(options)
       end
   end
 end

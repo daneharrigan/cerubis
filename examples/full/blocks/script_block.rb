@@ -3,6 +3,6 @@ class ScriptBlock
   include Cerubis::Block
 
   def render
-    %{<script>#{replace_variables(node.pre_render, node.context)}</script>}
+    %{<script>#{replace_variables(yield)}</script>}
   end
 end

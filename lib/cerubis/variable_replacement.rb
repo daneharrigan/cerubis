@@ -1,6 +1,6 @@
 class Cerubis
   module VariableReplacement
-    def replace_variables(str, ctx)
+    def replace_variables(str, ctx=context)
       str.gsub(Matcher::Variable) do |variable|
         match_var = variable.match(Matcher::Variable)[1]
         if match = match_var.match(Matcher::Helpers)

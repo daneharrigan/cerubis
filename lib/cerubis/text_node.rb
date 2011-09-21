@@ -4,7 +4,7 @@ class Cerubis
     include VariableReplacement
 
 		def render
-			replace_variables(pre_render, context)
+			replace_variables(pre_render)
 		end
   end
 end
