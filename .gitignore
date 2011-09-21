@@ -5,3 +5,5 @@ pkg/*
 tmp/*
 docs/*
 .rbx/*
+coverage.data
+coverage/*

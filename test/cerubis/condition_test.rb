@@ -75,4 +75,68 @@ class Cerubis::ConditionTest < MiniTest::Unit::TestCase
     condition = Cerubis::Condition.new(condition_str, :type => :loop, :context => context)
     refute condition.true?
   end
+
+  def test_double_equals_operator
+    condition_str = '1 == 1'
+    context   = Cerubis::Context.new
+    condition = Cerubis::Condition.new(condition_str, :type => :if, :context => context)
+
+    assert condition.true?
+  end
+
+  def test_triple_equals_operator
+    condition_str = 'foo === foo'
+    context   = Cerubis::Context.new(:foo => 'foo str')
+    condition = Cerubis::Condition.new(condition_str, :type => :if, :context => context)
+
+    assert condition.true?
+  end
+
+  def test_not_equals_operator
+    condition_str = 'foo != bar'
+    context   = Cerubis::Context.new(:foo => 'foo str', :bar => 'bar str')
+    condition = Cerubis::Condition.new(condition_str, :type => :if, :context => context)
+
+    assert condition.true?
+  end
+
+  def test_less_than_operator
+    condition_str = '1 < 2'
+    context   = Cerubis::Context.new
+    condition = Cerubis::Condition.new(condition_str, :type => :if, :context => context)
+
+    assert condition.true?
+  end
+
+  def test_greater_than_operator
+    condition_str = '2 > 1'
+    context   = Cerubis::Context.new
+    condition = Cerubis::Condition.new(condition_str, :type => :if, :context => context)
+
+    assert condition.true?
+  end
+
+  def test_less_than_or_equals_operator
+    context   = Cerubis::Context.new
+
+    condition_str = '1 <= 2'
+    condition = Cerubis::Condition.new(condition_str, :type => :if, :context => context)
+    assert condition.true?
+
+    condition_str = '2 <= 2'
+    condition = Cerubis::Condition.new(condition_str, :type => :if, :context => context)
+    assert condition.true?
+  end
+
+  def test_greater_than_or_equals_operator
+    context   = Cerubis::Context.new
+
+    condition_str = '2 >= 1'
+    condition = Cerubis::Condition.new(condition_str, :type => :if, :context => context)
+    assert condition.true?
+
+    condition_str = '2 >= 2'
+    condition = Cerubis::Condition.new(condition_str, :type => :if, :context => context)
+    assert condition.true?
+  end
 end

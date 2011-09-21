@@ -1,5 +1,6 @@
 require 'rubygems'
 require 'bundler/setup'
+require 'cover_me'
 require 'minitest/autorun'
 require 'cerubis'
 
