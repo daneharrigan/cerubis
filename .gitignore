@@ -7,3 +7,4 @@ docs/*
 .rbx/*
 coverage.data
 coverage/*
+docs/* # for now
