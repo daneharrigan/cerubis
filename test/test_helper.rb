@@ -1,5 +1,7 @@
 require 'rubygems'
-require 'bundler/setup'
+require 'bundler'
+
+Bundler.setup(:test)
 
 begin
   require 'cover_me'
