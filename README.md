@@ -78,7 +78,7 @@ template:
       end
     end
 
-    Cerubis.register_helper FooHelper
+    Cerubis.register_helper :foo_helper, FooHelper
 
     # Using the helper
     content = <<-STR
