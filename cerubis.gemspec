@@ -6,11 +6,11 @@ Gem::Specification.new do |s|
   s.name        = "cerubis"
   s.version     = Cerubis::VERSION
   s.platform    = Gem::Platform::RUBY
-  s.authors     = ["TODO: Write your name"]
-  s.email       = ["TODO: Write your email address"]
+  s.authors     = ["Dane Harrigan"]
+  s.email       = ["dane.harrigan@gmail.com"]
   s.homepage    = ""
-  s.summary     = %q{TODO: Write a gem summary}
-  s.description = %q{TODO: Write a gem description}
+  s.summary     = %q{A simple, secure, non-evaluating template engine}
+  s.description = %q{A simple, secure, non-evaluating template engine}
 
   s.rubyforge_project     = "cerubis"
   s.required_ruby_version = '>= 1.9.2'
