@@ -1,8 +1,5 @@
 # Cerubis [![Test Status](https://secure.travis-ci.org/daneharrigan/cerubis.png)][3]
 
-*WARNING:* Cerubis is still under initial development. Most features are
-not functional yet.
-
 Cerubis is inspired by [Liquid Markup][1] and [Mustache][2]. I like how
 Mustache syntax looks, but it's logic-less. Liquid allows just enough
 logic, but I don't like the syntax. And so Cerubis was born.
