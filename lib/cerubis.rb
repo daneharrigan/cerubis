@@ -44,11 +44,11 @@ class Cerubis
 end
 
 # Patching Ruby core objects
-require 'cerubis/objects/array'
-require 'cerubis/objects/float'
-require 'cerubis/objects/fixnum'
-require 'cerubis/objects/hash'
-require 'cerubis/objects/string'
+require 'cerubis/ext/array'
+require 'cerubis/ext/float'
+require 'cerubis/ext/fixnum'
+require 'cerubis/ext/hash'
+require 'cerubis/ext/string'
 
 Cerubis.register_block :if, Cerubis::Blocks::If
 Cerubis.register_block :unless, Cerubis::Blocks::Unless
