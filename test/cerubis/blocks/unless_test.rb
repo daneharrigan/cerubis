@@ -2,7 +2,7 @@ require 'test_helper'
 
 class Cerubis::Blocks::UnlessTest < MiniTest::Unit::TestCase
   def setup
-		context = Cerubis::Context.new
+    context = Cerubis::Context.new
     parent  = StubObject.new(:context => context)
     content = <<-STR
     {{#unless false}}

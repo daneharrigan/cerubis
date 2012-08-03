@@ -115,11 +115,11 @@ class RenderedTest < MiniTest::Unit::TestCase
 
     def hidden_content
       <<-STR
-				<body>
+        <body>
         {{#unless true}}
           <section id="hidden">Hidden Content</section>
         {{/unless}}
-				</body>
+        </body>
       STR
     end
 

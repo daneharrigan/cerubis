@@ -20,8 +20,8 @@ class Cerubis
       !@children.empty?
     end
 
-		def pre_render
-			return content
-		end
+    def pre_render
+      return content
+    end
   end
 end

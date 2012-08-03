@@ -3,8 +3,8 @@ class Cerubis
     include Node
     include VariableReplacement
 
-		def render
-			replace_variables(pre_render)
-		end
+    def render
+      replace_variables(pre_render)
+    end
   end
 end
