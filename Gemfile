@@ -11,5 +11,5 @@ end
 group :test do
   gem 'rake'
   gem 'capybara'
-  gem 'minitest', '>= 2.5'
+  gem 'minitest', '~> 3.3.0'
 end
