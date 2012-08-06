@@ -5,7 +5,7 @@ rvm:
   - 1.9.2
   - jruby-19mode
   - rbx-19mode
-  - ruby-head
+  #- ruby-head
   - jruby-head
 script: "ruby -Itest:lib test/all.rb"
 branches:
